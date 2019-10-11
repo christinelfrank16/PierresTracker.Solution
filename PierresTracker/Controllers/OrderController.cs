@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Data;
 using PierresTracker.Models;
 
 namespace PierresTracker.Controllers
@@ -36,7 +37,7 @@ namespace PierresTracker.Controllers
         [HttpGet("/vendors/all/order/all/summary")]
         public ActionResult Summary()
         {
-            List<Vendor> allVendors = Vendor.GetAll();
+            DataTable allVendors = DataAnalysis.CreateTable();
             return View("../Analysis/Summary", allVendors);
         }
     }

@@ -1,44 +1,46 @@
 using System.Collections.Generic;
+using System;
+using System.Data;
 
 namespace PierresTracker.Models
 {
     public abstract class DataAnalysis
     {
-        private static List<Vendor> dataSource = Vendor.GetAll();
-        private static List<string> columnNames = new List<string>{"Vendor", "Date", "Item", "Qty","Price"};
-        public static Dictionary<string, double[]> GroupData()
+        private static List<Vendor> _dataSource = Vendor.GetAll();
+
+        public static DataTable CreateTable()
         {
-            Dictionary<string, double[]> groupedData = new Dictionary<string, double[]>{};
-            foreach(Vendor vendor in dataSource)
+            DataTable orderDetailTable = new DataTable("OrderDetail");
+
+            DataColumn[] cols ={
+                      new DataColumn("Vendor_Name",typeof(String)),
+                      new DataColumn("Vendor_Id",typeof(Int32)),
+                      new DataColumn("Date",typeof(String)),
+                      new DataColumn("Order_Id",typeof(Int32)),
+                      new DataColumn("Item",typeof(String)),
+                      new DataColumn("UnitPrice",typeof(Decimal)),
+                      new DataColumn("OrderQty",typeof(Int32)),
+                      new DataColumn("LineTotal",typeof(Decimal),"UnitPrice*OrderQty")
+                  };
+            orderDetailTable.Columns.AddRange(cols);
+
+            List<Object[]> rows = new List<object[]>{};
+            foreach (Vendor vendor in _dataSource)
             {
-                foreach(Order order in vendor.OrderList)
+                foreach (Order order in vendor.OrderList)
                 {
-                    foreach(KeyValuePair<string, int> item in order.ItemsOrdered)
+                    foreach (KeyValuePair<string, int> item in order.ItemsOrdered)
                     {
-                        string groupName = vendor.Name + "_" + order.Date + "_" + item.Key;
-                        double[] value = new double[]{item.Value,Order.GetInventoryItemPrice(item.Key)*item.Value};
-                        groupedData.Add(groupName, value);
+                        rows.Add(new Object[]{vendor.Name,vendor.Id,order.Date, order.Id, item.Key, Order.GetInventoryItemPrice(item.Key),  item.Value});
                     }
                 }
             }
-            return groupedData;
-        }
 
-        public static string ParseDataName(string groupedDataName, int column)
-        {
-            string colValue = "";
-            if(column == 0)
+            foreach (Object[] row in rows)
             {
-                colValue = groupedDataName.Substring(0, groupedDataName.IndexOf("_"));
+                orderDetailTable.Rows.Add(row);
             }
-            else if(column == 2)
-            {
-                colValue = groupedDataName.Substring(groupedDataName.LastIndexOf("_")+1);
-            }
-            else{
-                colValue = groupedDataName.Substring(groupedDataName.IndexOf("_")+1, groupedDataName.LastIndexOf("_"));
-            }
-            return colValue;
+            return orderDetailTable;
         }
 
     }
