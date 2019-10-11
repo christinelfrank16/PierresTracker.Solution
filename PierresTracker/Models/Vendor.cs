@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PierresTracker.Models
 {
@@ -29,6 +30,12 @@ namespace PierresTracker.Models
             _orderId++;
             Order newOrder = new Order(_orderId, title, description,date, itemsOrdered);
             OrderList.Add(newOrder);
+        }
+
+        public static Vendor Find(int id)
+        {
+            Vendor foundVendor = VendorsList.Where(vendor => vendor.Id == id).FirstOrDefault();
+            return foundVendor;
         }
     }
 }
