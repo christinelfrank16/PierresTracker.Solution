@@ -1,7 +1,8 @@
 .jumbotron {
     text-align: center;
 }
-div#header {
-    position: fixed;
-    top: 0px;
+
+
+#headRow {
+    font-weight: bold;
 }
