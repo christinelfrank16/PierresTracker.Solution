@@ -7,7 +7,7 @@
 
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">Vendor Summary</a>
+        <a class="nav-link" href="/vendors">Vendor Summary</a>
       </li>
 
       <li class="nav-item dropdown">
@@ -17,7 +17,7 @@
         <div class="dropdown-menu">
           @foreach(Vendor vendor in Vendor.GetAll())
           {
-            <a class="dropdown-item" href="/vendor/{@vendor.Id}">@vendor.Name</a>
+            <a class="dropdown-item" href="/vendors/@vendor.Id">@vendor.Name</a>
           }
         </div>
       </li>

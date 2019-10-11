@@ -2,11 +2,25 @@
     font-weight: bold;
 }
 
-.navbar-text {
+.nav-item .navbar-text {
     color: white;
+    font-weight: 600;
 }
 
 th, tr{
     text-align: center;
     padding: 10px;
+}
+
+#orderSummary {
+    padding: 15px;
+}
+
+.center {
+    margin-left:auto; 
+    margin-right:auto;
+}
+
+.container {
+    margin: 20px;
 }
