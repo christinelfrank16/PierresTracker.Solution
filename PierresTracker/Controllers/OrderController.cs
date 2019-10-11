@@ -32,5 +32,12 @@ namespace PierresTracker.Controllers
             vendor.AddOrder(title, description, date, item, quantity);
             return View("../Vendor/Show", vendor);
         }
+
+        [HttpGet("/vendors/all/order/all/summary")]
+        public ActionResult Summary()
+        {
+            List<Vendor> allVendors = Vendor.GetAll();
+            return View(allVendors);
+        }
     }
 }
