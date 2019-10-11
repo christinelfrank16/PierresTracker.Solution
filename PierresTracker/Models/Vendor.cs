@@ -25,10 +25,10 @@ namespace PierresTracker.Models
             _vendorsList.Add(this);
         }
 
-        public void AddOrder(string title, string description, string date, List<string> itemsOrdered)
+        public void AddOrder(string title, string description, string date, List<string> items, List<int> quantity)
         {
             _orderId++;
-            Order newOrder = new Order(_orderId, title, description,date, itemsOrdered);
+            Order newOrder = new Order(_orderId, title, description,date, items, quantity);
             OrderList.Add(newOrder);
         }
 

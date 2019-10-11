@@ -7,7 +7,7 @@ namespace PierresTracker.Controllers
     public class OrderController : Controller
     {
 
-        [HttpGet("/vendors/{vendorId}/orders/{orderId}")]
+        [HttpGet("/vendors/{vendorId}/order/{orderId}")]
         public ActionResult Show(int vendorId, int orderId)
         {
             Vendor vendor = Vendor.FindVendor(vendorId);
@@ -18,26 +18,19 @@ namespace PierresTracker.Controllers
             return View(model);
         }
 
-        [HttpGet("/vendors/{vendorId}/orders/new")]
+        [HttpGet("/vendors/{vendorId}/order/new")]
         public ActionResult New(int vendorId)
         {
             Vendor vendor = Vendor.FindVendor(vendorId);
             return View(vendor);
         }
 
-        [HttpGet("/vendors/{vendorId}/orders")]
-        public ActionResult Index(int vendorId)
+        [HttpPost("/vendors/{vendorId}")]
+        public ActionResult Create(int vendorId, string title, string description, string date, List<string> item, List<int> quantity )
         {
             Vendor vendor = Vendor.FindVendor(vendorId);
-            return View(vendor);
-        }
-
-        [HttpPost("/vendors/{vendorId}/orders")]
-        public ActionResult Create(int vendorId, string title, string description, string date, List<string> itemsOrdered )
-        {
-            Vendor vendor = Vendor.FindVendor(vendorId);
-            vendor.AddOrder(title, description, date, itemsOrdered);
-            return View(vendor);
+            vendor.AddOrder(title, description, date, item, quantity);
+            return View("../Vendor/Show", vendor);
         }
     }
 }

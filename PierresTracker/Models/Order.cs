@@ -12,13 +12,13 @@ namespace PierresTracker.Models
         public Dictionary<string, int> ItemsOrdered { get; }
         public int Id { get; }
 
-        public Order(int id, string title, string description, string date, List<string> itemsOrdered)
+        public Order(int id, string title, string description, string date, List<string> items, List<int> quantity)
         {
             Id = id;
             Title = title;
             Description = description;
             Date = date;
-            ItemsOrdered = GroupOrderItems(itemsOrdered);
+            ItemsOrdered = GroupOrderItems(items, quantity);
             Price = CalculatePrice();
         }
 
@@ -52,20 +52,19 @@ namespace PierresTracker.Models
             return inventoryPrices;
         }
 
-        private Dictionary<string, int> GroupOrderItems(List<string> itemsOrdered)
+        private Dictionary<string, int> GroupOrderItems(List<string> items, List<int> quantities)
         {
-            itemsOrdered.Sort();
             Dictionary<string,int> groupedItems = new Dictionary<string, int>{};
             
-            for(int i=0; i<itemsOrdered.Count;i++)
+            for(int i=0; i<items.Count;i++)
             {
-                if(!groupedItems.ContainsKey(itemsOrdered[i]))
+                if(!groupedItems.ContainsKey(items[i]))
                 {
-                    groupedItems.Add(itemsOrdered[i], 1);
+                    groupedItems.Add(items[i], quantities[i]);
                 }
                 else
                 {
-                    groupedItems[itemsOrdered[i]]++;
+                    groupedItems[items[i]]+=quantities[i];
                 }
             }
 
@@ -87,6 +86,11 @@ namespace PierresTracker.Models
         {
             List<string> inventoryItems = new List<string>(_inventoryPrices.Keys);
             return inventoryItems;
+        }
+
+        public static double GetInventoryItemPrice(string item)
+        {
+            return _inventoryPrices[item];
         }
     }
 }
