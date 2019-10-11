@@ -1,0 +1,59 @@
+@using PierresTracker.Models;
+@using System.Collections.Generic;
+<html>
+    <head>
+        <title>All Order Summary</title>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='~/css/styles.css'>
+    </head>
+    <body>
+        @Html.Partial("Header")
+        <div class = "container">
+            <h1>All Order Summary</h1>
+            
+            <div id=orderSummary>
+                <div class="row" id= "headRow">
+                    <div class="col-md-auto">
+                        Vendor <button id="vendor" type="click">x</button>
+                    </div>
+                    <div class="col-md-auto">
+                        Date <button id="date" type="click">x</button>
+                    </div>
+                    <div class="col-md-auto">
+                        Item <button id="item" type="click">x</button>
+                    </div>
+                    <div class="col-md-auto">
+                        Qty <button id="qty" type="click">x</button>
+                    </div>
+                    <div class="col-md-auto">
+                        Tot. Price <button id="price" type="click">x</button>
+                    </div>
+                </div>
+                @foreach(KeyValuePair<string, double[]> pair in Model)
+                {
+                    <div class="row">
+                        <div class="col-md-auto">
+                            @DataAnalysis.ParseDataName(@pair.Key,0)
+                        </div>
+                        <div class="col-md-auto">
+                            @DataAnalysis.ParseDataName(@pair.Key,1)
+                        </div>
+                        <div class="col-md-auto">
+                            @DataAnalysis.ParseDataName(@pair.Key,2)
+                        </div>
+                        <div class="col-md-auto">
+                            @Order.GetInventoryItemPrice(@pair.Key)
+                        </div>
+                        <div class="col-md-auto">
+                            @pair.Value[0]
+                        </div>
+                        <div class="col-md-2">
+                            @pair.Value[1]
+                        </div>
+                    </div>
+                }
+
+            </div> 
+        </div>
+    </body>
+</html>

@@ -37,7 +37,7 @@ namespace PierresTracker.Controllers
         public ActionResult Summary()
         {
             List<Vendor> allVendors = Vendor.GetAll();
-            return View(allVendors);
+            return View("../Analysis/Summary", allVendors);
         }
     }
 }

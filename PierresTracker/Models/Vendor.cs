@@ -48,5 +48,6 @@ namespace PierresTracker.Models
         {
             return _vendorsList;
         }
+
     }
 }
