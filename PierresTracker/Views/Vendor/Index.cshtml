@@ -1,0 +1,27 @@
+@using PierresTracker.Models;
+<html>
+    <head>
+        <title>Pierre's Vendor Tracker</title>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+    </head>
+    <body>
+        @Html.Partial("Header");
+        <div class = "container">
+            @if(@Model.Count == 0)
+            {
+                <p> There are no vendors in your system! </p>
+                <p> Add one <a href="/vendors/new">here</a>!</p>
+            }
+            else
+            {
+                <ul>
+                    @foreach(Vendor vendor in @Model)
+                    {
+                        <li><a href="/vendors/@vendor.Id">@vendor.Name</a></li>
+                    }
+                </ul>
+                <p> Add another vendor <a href="/vendors/new">here</a>!</p>
+            }
+        </div>
+    </body>
+</html>

@@ -21,6 +21,7 @@ namespace PierresTracker.Models
             Id = _currentVendorId;
             _orderId = 0;
             OrderList = new List<Order>{};
+            VendorsList.Add(this);
         }
 
         public void AddOrder(string title, string description, string date, List<string> itemsOrdered)
