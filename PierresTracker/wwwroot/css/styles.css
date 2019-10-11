@@ -1,7 +1,12 @@
-.jumbotron {
-    text-align: center;
-}
-
 #headRow {
     font-weight: bold;
+}
+
+.navbar-text {
+    color: white;
+}
+
+th, tr{
+    text-align: center;
+    padding: 10px;
 }
