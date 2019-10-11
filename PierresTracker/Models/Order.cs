@@ -82,5 +82,11 @@ namespace PierresTracker.Models
             }
             return totalPrice;
         }
+
+        public static List<string> GetInventoryItems()
+        {
+            List<string> inventoryItems = new List<string>(_inventoryPrices.Keys);
+            return inventoryItems;
+        }
     }
 }
