@@ -1,0 +1,101 @@
+@using PierresTracker.Models;
+<html>
+    <head>
+        <title>Pierre's Vendor Tracker</title>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+        <!-- Bootstrap Date-Picker Plugin -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    </head>
+    <script>
+        $(document).ready(function(){
+            var date_input=$('input[name="date"]');
+            var container=$('form').length>0 ? $('form').parent() : "body";
+            var options={
+                format: 'mm/dd/yyyy',
+                container: container,
+                todayHighlight: true,
+                autoclose: true,
+            };
+            date_input.datepicker(options);
+
+        });
+        function AddItemRowForm() {
+            $('#orderItems').append(
+                `<div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="item">Select Item</label>
+                            <select class="custom-select mr-sm-2" id="item" name="item">
+                                <option selected>Choose...</option>
+                                @foreach(string orderOption in @Order.GetInventoryItems())
+                                {
+                                    <option value="@orderOption">@orderOption</option>
+
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label" for="quantity">Qty</label>
+                            <input class="form-control" id="quantity" name="quantity" type="number"/>
+                        </div>
+                    </div>
+                </div>`
+            );
+        }
+    </script>
+    <body>
+        <div class="container">
+            <h1>Add a new order </h1>
+            <form action="/vendors/@Model.Id/orders" method="post">
+                <h4>Order Type</h4>
+                <input id="vendorId" name="vendorId" type="hidden" value="@Model.Id">
+                <div class="form-group">
+					<label for="name">Enter the order title</label>
+					<input id="name" name="name" type="text" class="form-control">
+				</div>
+                <div class="form-group">
+					<label for="description">Enter a order description</label>
+					<input id="description" name="description" type="text" class="form-control">
+				</div>
+                <div class="form-group">
+                    <label class="control-label" for="date">Order date</label>
+                    <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
+                </div>
+                <hr>
+                <h4>Order Items</h4>
+                <div id="orderItems">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="item">Select Item</label>
+                                <select class="custom-select mr-sm-2" id="item" name="item">
+                                    <option selected>Choose...</option>
+                                    @foreach(string orderOption in @Order.GetInventoryItems())
+                                    {
+                                        <option value="@orderOption">@orderOption</option>
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="quantity">Qty</label>
+                                <input class="form-control" id="quantity" name="quantity" type="number"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-secondary" onclick="AddItemRowForm();">Add Another Item</button>
+                <br>
+                <hr>
+				<button type="submit" class="btn btn-primary">Create Order</button>
+            </form>
+        </div>
+    </body>
+</html>
