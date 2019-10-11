@@ -11,7 +11,7 @@ namespace PierresTracker.Models
         public string Description { get; }
         public int Id { get; }
         public List<Order> OrderList { get; }
-        private int OrderId { get; set; }
+        private int _orderId { get; set; }
 
         public Vendor(string name, string description)
         {
@@ -19,13 +19,15 @@ namespace PierresTracker.Models
             Description = description;
             _currentVendorId++;
             Id = _currentVendorId;
-            OrderId = 0;
+            _orderId = 0;
             OrderList = new List<Order>{};
         }
 
-        public void AddOrder(string title, string description)
+        public void AddOrder(string title, string description, string date, List<string> itemsOrdered)
         {
-            
+            _orderId++;
+            Order newOrder = new Order(_orderId, title, description,date, itemsOrdered);
+            OrderList.Add(newOrder);
         }
     }
 }
