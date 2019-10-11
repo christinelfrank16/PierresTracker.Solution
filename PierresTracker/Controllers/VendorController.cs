@@ -10,14 +10,14 @@ namespace PierresTracker.Controllers
         [HttpGet("/vendors")]
         public ActionResult Index()
         {
-            List<Vendor> vendorList = Vendor.VendorsList;
+            List<Vendor> vendorList = Vendor.GetAll();
             return View(vendorList);
         }
 
         [HttpGet("/vendors/new")]
         public ActionResult New()
         {
-            List<Vendor> vendorList = Vendor.VendorsList;
+            List<Vendor> vendorList = Vendor.GetAll();
             return View(vendorList);
         }
 
@@ -31,7 +31,7 @@ namespace PierresTracker.Controllers
         [HttpGet("/vendors/{id}")]
         public ActionResult Show(int id)
         {
-            Vendor vendor = Vendor.Find(id);
+            Vendor vendor = Vendor.FindVendor(id);
             return View(vendor);
         }
     }

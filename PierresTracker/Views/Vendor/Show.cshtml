@@ -18,12 +18,12 @@
                 else
                 {
                     <ul>
-                        @foreach(Vendor vendor in @Model)
+                        @foreach(Order order in @Model.OrderList)
                         {
-                            <li><a href="/vendors/@vendor.Id">@vendor.Name</a></li>
+                            <li><a href="/vendors/@order.Id">@order.Title </a></li>
                         }
                     </ul>
-                    <p> Add another vendor <a href="/vendors/new">here</a>!</p>
+                    <p> Add another order <a href="/vendors/@Model.Id/orders/new">here</a>!</p>
                 }
             </div>
         </div>
