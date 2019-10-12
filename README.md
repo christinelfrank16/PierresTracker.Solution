@@ -1,4 +1,4 @@
-# Word Counter
+# Pierre's Vendor Tracker
 
 #### A website to track vendors and their orders, 11-Oct-2019
 
