@@ -31,7 +31,7 @@ namespace PierresTracker.Controllers
         {
             Vendor vendor = Vendor.FindVendor(vendorId);
             vendor.AddOrder(title, description, date, item, quantity);
-            return View("../Vendor/Show", vendor);
+            return RedirectToAction("Show", "Vendor", vendor);
         }
 
         [HttpGet("/vendors/all/order/all/summary")]
