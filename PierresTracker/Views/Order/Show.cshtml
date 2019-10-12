@@ -10,7 +10,7 @@
         <link rel='stylesheet' href='~/css/styles.css'>
     </head>
     <body>
-        @Html.Partial("Header")
+        @await Html.PartialAsync("Header")
         <div class = "container">
             <h2>@Model["vendor"].Name</h2>
             <h3>@Model["order"].Title, @Model["order"].Description</h3>

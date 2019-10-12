@@ -8,7 +8,7 @@
         <link rel='stylesheet' href='~/css/styles.css'>
     </head>
     <body>
-        @Html.Partial("Header")
+        @await Html.PartialAsync("Header")
         <div class = "container">
             <p>Click <a href="/vendors">here</a> to view your vendor summary</p>
             <p>Click <a href="/vendors/all/order/all/summary">here</a> to view your overall order breakdown</p>
