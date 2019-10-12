@@ -16,6 +16,7 @@ This is a MVC website created to allow a business owner to track vendors and the
     * Command: 'dotnet tool install -g dotnet-script'
 * Open a new Command Terminal and route to the root of the local repository
 * Enter command 'dotnet run' into the Terminal
+* Open a new browser and enter 'http://localhost:5000/'
 
 ## Known Bugs
 
