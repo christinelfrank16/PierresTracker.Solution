@@ -14,7 +14,7 @@ This is a MVC website created to allow a business owner to track vendors and the
 * Install .NET Core SDK (if not already installed)
 * Install REPL *dotnet script* (if not already installed)
     * Command: 'dotnet tool install -g dotnet-script'
-* Open a new Command Terminal and route to the root of the local repository
+* Open a new Command Terminal and route to the main project folder of the local repository (//Desktop/PierresTracking.Solution/PierresTracking)
 * Enter command 'dotnet run' into the Terminal
 * Open a new browser and enter 'http://localhost:5000/'
 
